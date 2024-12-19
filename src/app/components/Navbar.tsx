@@ -8,21 +8,19 @@ import { Heart, Menu, Search, X } from 'lucide-react'
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+    const checkWindowSize = () => {
       if (window.innerWidth >= 768) {
         setIsOpen(false)
       }
     }
 
-    checkIsMobile()
-    window.addEventListener('resize', checkIsMobile)
+    checkWindowSize()
+    window.addEventListener('resize', checkWindowSize)
 
     return () => {
-      window.removeEventListener('resize', checkIsMobile)
+      window.removeEventListener('resize', checkWindowSize)
     }
   }, [])
 
@@ -48,9 +46,7 @@ export function NavBar() {
         </div>
       </div>
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-96" : "max-h-0"
-        }`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96" : "max-h-0"}`}
       >
         <div className="pt-4 pb-2 space-y-2 text-center">
           <NavLinks mobile />
